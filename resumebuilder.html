@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<style>
+    img {
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+    <div class="container d-flex">
+        <form action="">
+            <h1 style="color: chocolate;">Resume Builder</h1>
+            <label for="name">Enter your name:</label>
+            <input type="text" class="form-control" id="frstname">
+            <label for="mobile">Enter your mobile number:</label>
+            <input type="text" id="num" class="form-control">
+            <label for="mail">Email:</label>
+            <input type="email" id="mail" class="form-control">
+            <label for="linked">LinkedIn ID:</label>
+            <input type="text" id="linked" class="form-control">
+            <label for="add">Address:</label>
+            <textarea name="adds" id="address" cols="30" rows="10"></textarea></br>
+            <label for="education">Education:</label>
+            <label for="high">Highest Degree:</label>
+            <input type="text" class="form-control" id="high">
+            <label for="university">University:</label>
+            <input type="text" class="form-control" id="university">
+            <label for="date">Passed out</label>
+            <input type="date" class="form-control" id="passoutclg">
+            <label for="twelve">12th</label>
+            <label for="school">School:</label>
+            <input type="text" id="school1" class="form-control">
+            <input type="date" class="form-control" id="passoutscl1">
+            <label for="twelve">10th</label>
+            <label for="school">School:</label>
+            <input type="text" id="school2" class="form-control">
+            <input type="date" class="form-control" id="passoutscl2">
+
+            <label for="tech">Enter your technical Skills:</label>
+            <input type="text" id="tech" class="form-control">
+            <button type="button" class="btn btn-info" onclick="techadd()">Add</button>
+            <select name="technical" id="technical"></select></br>
+
+            <label for="soft">Enter your soft Skills:</label>
+            <input type="text" id="soft" class="form-control">
+            <button type="button" class="btn btn-info" onclick="softadd()">Add</button>
+            <select name="softskill" id="softskill"></select></br>
+
+
+            <label for="hobby">Enter your Hobbbies:</label>
+            <input type="text" id="hobby" class="form-control">
+            <button type="button" class="btn btn-info" onclick="hobadd()">Add</button>
+            <select name="hobbies" id="hobbies"></select></br>
+
+
+            <label for="language">Enter your Languages:</label>
+            <input type="text" id="language" class="form-control">
+            <button type="button" class="btn btn-info" onclick="lanadd()">Add</button>
+            <select name="languages" id="languages"></select></br>
+
+
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo"></br>
+            <button type="button" class="btn btn-primary" onclick="generate()">Generate resume</button>
+        </form>
+    </div>
+    <div class="container d-flex" id="head">
+        <div id="head1"> </div>
+        <span class="name1" id="name1" style="font-size: 80px; font-weight: bolder;" ></span>
+    </div>
+    <div id="head2" class="container">
+        <div class="cont1"></div>
+    </div>
+    <script>
+        let techarr = []
+        function techadd() {
+            let tech = document.getElementById("tech").value;
+            let tecsel = document.getElementById("technical")
+            let techopt = document.createElement("option")
+            techopt.textContent = tech
+            tecsel.appendChild(techopt)
+            techarr.push(tech)
+            tecsel.setAttribute("size", techarr.length)
+            document.getElementById("tech").value = "";
+        }
+        let softarr = []
+        function softadd() {
+            let soft = document.getElementById("soft").value;
+            let softsel = document.getElementById("softskill")
+            let softopt = document.createElement("option")
+            softopt.textContent = soft
+            softsel.appendChild(softopt)
+            softarr.push(soft)
+            softsel.setAttribute("size", softarr.length)
+            document.getElementById("soft").value = "";
+        }
+        let hobarr = []
+        function hobadd() {
+            let hobby = document.getElementById("hobby").value;
+            let hobsel = document.getElementById("hobbies")
+            let hobopt = document.createElement("option")
+            hobopt.textContent = hobby
+            hobsel.appendChild(hobopt)
+            hobarr.push(hobby)
+            hobsel.setAttribute("size", hobarr.length)
+            document.getElementById("hobby").value = "";
+        }
+        let lanarr = []
+        function lanadd() {
+            let language = document.getElementById("language").value;
+            let lansel = document.getElementById("languages")
+            let lanopt = document.createElement("option")
+            lanopt.textContent = language
+            lansel.appendChild(lanopt)
+            lanarr.push(language)
+            lansel.setAttribute("size", lanarr.length)
+            document.getElementById("language").value = "";
+        }
+        function generate() {
+            let photo = document.getElementById("photo")
+
+            let fr = new FileReader()
+            fr.readAsDataURL(photo.files[0])
+
+
+            fr.addEventListener('load', () => {
+                const url = fr.result
+                let local = localStorage.setItem("url", url)
+
+
+                let img = new Image()
+                img.src = localStorage.getItem("url")
+                img.setAttribute("height", "200px")
+                img.setAttribute("width", "200px")
+                let div = document.getElementById("head1")
+                div.appendChild(img)
+            })
+            let frstname = document.getElementById("frstname").value
+            let frstname1=document.getElementById("name1").innerHTML = (frstname)
+            
+
+            let head2=document.getElementById("head2")
+            let conthead=document.createElement("h3")
+            let txt=document.createTextNode("Contact Details")
+            conthead.appendChild(txt)
+            head2.appendChild(conthead)
+
+            let phnum=document.getElementById("num").value
+            let cont1=document.getElementById("head2")
+            let conthead1 = document.createElement("h3")
+            conthead1.innerHTML=("Phone Number: "+phnum)
+            cont1.appendChild(conthead1)
+            
+            let mail=document.getElementById("mail").value
+            let cont2=document.getElementById("head2")
+            let conthead2 = document.createElement("h3")
+            conthead2.innerHTML=("Email: "+mail)
+            cont2.appendChild(conthead2)
+
+            
+            let linked=document.getElementById("linked").value
+            let cont3=document.getElementById("head2")
+            let conthead3 = document.createElement("h3")
+            conthead3.innerHTML=("LinkedIn: "+linked)
+            cont3.appendChild(conthead3)
+
+            let address=document.getElementById("address").value
+            let cont4=document.getElementById("head2")
+            let conthead4 = document.createElement("h3")
+            conthead4.innerHTML=("Address: "+address)
+            cont4.appendChild(conthead4)
+        }
+    </script>
+</body>
+
+</html>
